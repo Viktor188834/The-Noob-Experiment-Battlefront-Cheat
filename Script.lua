@@ -72,36 +72,35 @@ plr.CharacterAdded:Connect(function(NewCha)
 	end
 	if O1 == true then
 		repeat
-			game:GetService("RunService").Heartbeat:Wait()
-			if not char then
-				repeat
-					wait()
-				until char
+		game:GetService("RunService").Heartbeat:Wait()
+		if not char then
+			repeat
+				wait()
+			until char
+		end
+		local Humanoid = Get_Humanoid()
+		if O2 == true and game:GetService("ReplicatedStorage").Status.Wave.Value == 0 then
+			Vote()
+		end
+		local Enemy = Get_MaxHealth_Top()
+		if Enemy then
+			if O4 == true then
+				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, Enemy:WaitForChild("HumanoidRootPart").Size.Y))
+			else
+				Move(Enemy:WaitForChild("HumanoidRootPart").Position)
 			end
-			local Humanoid = Get_Humanoid()
-			if game:GetService("ReplicatedStorage").Status.Wave.Value == 0 and O2 == true and game:GetService("ReplicatedStorage").Status.Wave.Value == 0 then
-				Vote()
+			if O7 == true and O4 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
+				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
+			elseif O7 == true and O4 == false Humanoid.Health <= (Humanoid.MaxHealth/4) then
+				UseOnlyName("Teleport")
 			end
-			if O3 == true and game:GetService("ReplicatedStorage").Status.Wave.Value == 0 then
-				game:GetService("ReplicatedStorage").Votes.SkipVoted:FireServer("Yes")
+			if math.random(1, 31) == 22 or O6 == true then
+				UseEverything()
+			else
+				UseOnly("LMB")
 			end
-			local Enemy = Get_MaxHealth_Top()
-			if Enemy then
-				if O4 == true then
-					Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, Enemy:WaitForChild("HumanoidRootPart").Size.Y))
-				else
-					Move(Enemy:WaitForChild("HumanoidRootPart").Position)
-				end
-				if O7 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
-					Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
-				end
-				if math.random(1, 31) == 22 or O6 == true then
-					UseEverything()
-				else
-					UseOnly("LMB")
-				end
-			end
-		until O1 == false
+		end
+	until O1 == false
 	end
 end)
 
