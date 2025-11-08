@@ -66,6 +66,16 @@ local ToCompletingMap = Maps.Crossroad
 local ToCompletingDifficulty = Difficulty.Nightmare
 local EnemiesFolder = workspace.Enemies
 
+local Status = {
+	Difficulty = game:GetService("ReplicatedStorage").Status.Difficulty.Value,
+	Wave = game:GetService("ReplicatedStorage").Status.Wave.Value
+}
+
+game:GetService("RunService").Heartbeat:Connect(function()
+	Status.Difficulty = game:GetService("ReplicatedStorage"):WaitForChild("Status"):WaitForChild("Difficulty").Value
+	Status.Wave = game:GetService("ReplicatedStorage"):WaitForChild("Status"):WaitForChild("Wave").Value
+end)
+
 local O1 = false
 local O2 = false
 local O3 = false
@@ -123,16 +133,6 @@ plr.CharacterAdded:Connect(function(NewCha)
 			end
 		until O1 == false
 	end
-end)
-
-local Status = {
-	Difficulty = game:GetService("ReplicatedStorage").Status.Difficulty.Value,
-	Wave = game:GetService("ReplicatedStorage").Status.Wave.Value
-}
-
-game:GetService("RunService").Heartbeat:Connect(function()
-	Status.Difficulty = game:GetService("ReplicatedStorage").Status.Difficulty.Value
-	Status.Wave = game:GetService("ReplicatedStorage").Status.Wave.Value
 end)
 
 function Vote()
