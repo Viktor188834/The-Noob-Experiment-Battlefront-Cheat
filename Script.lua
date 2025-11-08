@@ -3,7 +3,7 @@ print("The Script Was Started")
 print("Subscribe To telegram chanel!")
 print("https://t.me/WhatThePlace7")
 print("")
-local BestCharacter = "Shedletsky"
+local BestCharacter = "Noob"
 local Difficulty = {
 	Hard = "hard",
 	Easy = "easy",
