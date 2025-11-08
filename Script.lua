@@ -157,6 +157,17 @@ function UseOnly(KeybindName: string)
 	end
 end
 
+function UseOnlyName(name: string)
+	local Abilities = char:FindFirstChild("Abilities")
+	if Abilities then
+		for i,v in Abilities:GetChildren() do
+			if v.Name == name then
+				Fire(v:FindFirstChildOfClass("RemoteEvent"))
+			end
+		end
+	end
+end
+
 function GetNearestEnemy()
 	local nearestEnemy = nil
 	local nearestDistance = 10000
@@ -236,8 +247,10 @@ Farm:AddSlideButton("Main", function()
 			else
 				Move(Enemy:WaitForChild("HumanoidRootPart").Position)
 			end
-			if O7 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
+			if O7 == true and O4 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
 				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
+			elseif O7 == true and O4 == false Humanoid.Health <= (Humanoid.MaxHealth/4) then
+				UseOnlyName("Teleport")
 			end
 			if math.random(1, 31) == 22 or O6 == true then
 				UseEverything()
