@@ -5,11 +5,20 @@ print("https://t.me/WhatThePlace7")
 print("")
 local BestCharacter = "Noob"
 local Difficulty = {
-	Hard = "hard",
-	Easy = "easy",
-	Medium = "medium",
-	Nightmare = "necro"
+	["Hard"] = "hard",
+	["Easy"] = "easy",
+	["Medium"] = "medium",
+	["Nightmare"] = "necro",
+	["BossRush"] = "boss rush"
 }
+
+local To_Select_Difficulty = {}
+
+for i,v in Difficulty do
+	To_Select_Difficulty[i] = {i, function()
+		game:GetService("ReplicatedStorage").Votes.Voted:FireServer(v)
+	end}
+end
 
 local ZombieMinus = {
 	"Cloned Giant Acidic Experiment",
@@ -32,9 +41,21 @@ function Get_Humanoid()
 end
 
 local Maps = {
-	Crossroad = "crossroad",
-	Roblox_Hq = "roblox hq"
+	["Crossroad"] = "crossroad",
+	["Roblox_Hq"] = "roblox hq",
+	["City"] = "city",
+	["Desert"] = "desert",
+	["Tundra"] = "tundra",
+	["BattleField"] = "battlefield"
 }
+
+local To_Maps_Select = {}
+
+for i,v in Maps do
+	To_Maps_Select[i] = {i, function()
+		game:GetService("ReplicatedStorage").Votes.MapVoted:FireServer(v)
+	end}
+end
 
 local Votes = {
 	Difficulty = game:GetService("ReplicatedStorage").Votes.Voted,
@@ -72,35 +93,35 @@ plr.CharacterAdded:Connect(function(NewCha)
 	end
 	if O1 == true then
 		repeat
-		game:GetService("RunService").Heartbeat:Wait()
-		if not char then
-			repeat
-				wait()
-			until char
-		end
-		local Humanoid = Get_Humanoid()
-		if O2 == true and game:GetService("ReplicatedStorage").Status.Wave.Value == 0 then
-			Vote()
-		end
-		local Enemy = Get_MaxHealth_Top()
-		if Enemy then
-			if O4 == true then
-				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, Enemy:WaitForChild("HumanoidRootPart").Size.Y))
-			else
-				Move(Enemy:WaitForChild("HumanoidRootPart").Position)
+			game:GetService("RunService").Heartbeat:Wait()
+			if not char then
+				repeat
+					wait()
+				until char
 			end
-			if O7 == true and O4 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
-				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
-			elseif O7 == true and O4 == false Humanoid.Health <= (Humanoid.MaxHealth/4) then
-				UseOnlyName("Teleport")
+			local Humanoid = Get_Humanoid()
+			if O2 == true and Status.Wave == 0 then
+				Vote()
 			end
-			if math.random(1, 31) == 22 or O6 == true then
-				UseEverything()
-			else
-				UseOnly("LMB")
+			local Enemy = Get_MaxHealth_Top()
+			if Enemy then
+				if O4 == true then
+					Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, Enemy:WaitForChild("HumanoidRootPart").Size.Y))
+				else
+					Move(Enemy:WaitForChild("HumanoidRootPart").Position)
+				end
+				if O7 == true and O4 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
+					Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
+				elseif O7 == true and O4 == false and Humanoid.Health <= (Humanoid.MaxHealth/4) then
+					UseOnlyName("Teleport")
+				end
+				if math.random(1, 31) == 22 or O6 == true then
+					UseEverything()
+				else
+					UseOnly("LMB")
+				end
 			end
-		end
-	until O1 == false
+		until O1 == false
 	end
 end)
 
@@ -229,35 +250,35 @@ end)
 Farm:AddSlideButton("Main", function()
 	O1 = true
 	repeat
-		game:GetService("RunService").Heartbeat:Wait()
-		if not char then
-			repeat
-				wait()
-			until char
-		end
-		local Humanoid = Get_Humanoid()
-		if O2 == true and game:GetService("ReplicatedStorage").Status.Wave.Value == 0 then
-			Vote()
-		end
-		local Enemy = Get_MaxHealth_Top()
-		if Enemy then
-			if O4 == true then
-				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, Enemy:WaitForChild("HumanoidRootPart").Size.Y))
-			else
-				Move(Enemy:WaitForChild("HumanoidRootPart").Position)
+			game:GetService("RunService").Heartbeat:Wait()
+			if not char then
+				repeat
+					wait()
+				until char
 			end
-			if O7 == true and O4 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
-				Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
-			elseif O7 == true and O4 == false Humanoid.Health <= (Humanoid.MaxHealth/4) then
-				UseOnlyName("Teleport")
+			local Humanoid = Get_Humanoid()
+			if O2 == true and Status.Wave == 0 then
+				Vote()
 			end
-			if math.random(1, 31) == 22 or O6 == true then
-				UseEverything()
-			else
-				UseOnly("LMB")
+			local Enemy = Get_MaxHealth_Top()
+			if Enemy then
+				if O4 == true then
+					Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, 0, Enemy:WaitForChild("HumanoidRootPart").Size.Y))
+				else
+					Move(Enemy:WaitForChild("HumanoidRootPart").Position)
+				end
+				if O7 == true and O4 == true and Humanoid.Health <= (Humanoid.MaxHealth/4) then
+					Teleport(Enemy:WaitForChild("HumanoidRootPart").CFrame*CFrame.new(0, -100, 0))
+				elseif O7 == true and O4 == false and Humanoid.Health <= (Humanoid.MaxHealth/4) then
+					UseOnlyName("Teleport")
+				end
+				if math.random(1, 31) == 22 or O6 == true then
+					UseEverything()
+				else
+					UseOnly("LMB")
+				end
 			end
-		end
-	until O1 == false
+		until O1 == false
 end, function()
 	O1 = false
 end)
@@ -270,27 +291,15 @@ end, function()
 	O2 = false
 end, "Auto Vote Difficulty and Map")
 
-Farm:SelectButtons("Choose Difficulty", 3, "", 5, {{"Easy", function()
-	ToCompletingDifficulty = Difficulty.Easy
-end}, {"Medium", function()
-	ToCompletingDifficulty = Difficulty.Medium
-end}, {"Hard", function()
-	ToCompletingDifficulty = Difficulty.Hard
-end}, {"Nightmare", function()
-	ToCompletingDifficulty = Difficulty.Nightmare
-end}})
+Farm:SelectButtons("Choose Difficulty", 3, "", 5, To_Select_Difficulty)
 
-Farm:SelectButtons("Choose Map", 3, "", 5, {{"Crossroad", function()
-	ToCompletingMap = Maps.Crossroad
-end}, {"Roblox hq", function()
-	ToCompletingMap = Maps.Roblox_Hq
-end}})
+Farm:SelectButtons("Choose Map", 3, "", 5, To_Maps_Select)
 
 Farm:AddSlideButton("Auto Vote Skip", function()
 	O3 = true
 	repeat
 		game:GetService("ReplicatedStorage").Votes.SkipVoted:FireServer("Yes")
-		wait(1.5)
+		wait(math.random(1, 5))
 	until O3 == false
 end, function()
 	O3 = false
