@@ -16,7 +16,7 @@ local To_Select_Difficulty = {}
 
 for i,v in Difficulty do
 	To_Select_Difficulty[i] = {i, function()
-		game:GetService("ReplicatedStorage").Votes.Voted:FireServer(v)
+		ToCompletingDifficulty = v
 	end}
 end
 
@@ -53,7 +53,7 @@ local To_Maps_Select = {}
 
 for i,v in Maps do
 	To_Maps_Select[i] = {i, function()
-		game:GetService("ReplicatedStorage").Votes.MapVoted:FireServer(v)
+		ToCompletingMap = v
 	end}
 end
 
